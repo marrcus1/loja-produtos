@@ -1,13 +1,15 @@
 // app/page.tsx
-import React from 'react';
-import ProductList from '@/components/ProductList';
+"use client";
 
-const HomePage = () => {
+import React from 'react';
+import ProductList from '../components/ProductList';
+import QueryClientProviderWrapper from '../components/QueryClientProviderWrapper';
+
+const HomePage: React.FC = () => {
   return (
-    <div>
-      <h1>Bem-vindo à Loja de Produtos</h1>
+    <QueryClientProviderWrapper>
       <ProductList />
-    </div>
+    </QueryClientProviderWrapper>
   );
 };
 

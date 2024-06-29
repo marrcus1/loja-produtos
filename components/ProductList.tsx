@@ -1,4 +1,5 @@
 // components/ProductList.tsx
+"use client"; 
 import React from 'react';
 import { useQuery } from 'react-query';
 import Product from './Product';
