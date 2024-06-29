@@ -3,11 +3,15 @@
 // components/ProductList.tsx
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/api';
+import { Product } from '../types';
+import ProductItem from './ProductItem';
+import useCartStore from '../store/cartStore'; // Ajuste para importar seu Zustand store
 
 const ProductList: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -35,17 +39,11 @@ const ProductList: React.FC = () => {
   return (
     <div>
       <h1>Produtos</h1>
-      <ul>
+      <div>
         {products.map((product) => (
-          <li key={product.id}>
-            <img src={product.photo} alt={product.name} />
-            <h2>{product.name}</h2>
-            <p>{product.brand}</p>
-            <p>{product.description}</p>
-            <p>R$ {product.price}</p>
-          </li>
+          <ProductItem key={product.id} product={product} addToCart={addToCart} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
