@@ -20,7 +20,7 @@ const Cart: React.FC = () => {
         <CartItem key={item.id}>
           <ItemDetails>
             <ItemName>{item.name}</ItemName>
-            <ItemPrice>${(item.price * item.quantity).toFixed(2)}</ItemPrice>
+            <ItemPrice>${(Number(item.price) * Number(item.quantity)).toFixed(2)}</ItemPrice>
           </ItemDetails>
           <ItemQuantity>
             <Button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</Button>
