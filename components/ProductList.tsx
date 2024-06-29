@@ -1,49 +1,31 @@
-// components/ProductList.tsx
 "use client"; 
 // components/ProductList.tsx
-import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../services/api';
-import { Product } from '../types';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { fetchProducts } from '../services/fetchProducts';
 import ProductItem from './ProductItem';
-import useCartStore from '../store/cartStore'; // Ajuste para importar seu Zustand store
+import SkeletonLoader from './SkeletonLoader';
+import useCartStore from '../store/cartStore';
 
 const ProductList: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: products, error, isLoading } = useQuery('products', fetchProducts);
   const addToCart = useCartStore((state) => state.addToCart);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const data = await fetchProducts();
-        setProducts(data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setIsLoading(false);
-      }
-    };
-
-    getProducts();
-  }, []);
-
-  if (isLoading) {
-    return <div>Carregando...</div>;
-  }
-
-  if (error) {
-    return <div>Erro: {error}</div>;
-  }
+  if (isLoading) return <SkeletonLoader />;
+  if (error) return <div>Failed to load products</div>;
 
   return (
     <div>
-      <h1>Produtos</h1>
-      <div>
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product} addToCart={addToCart} />
-        ))}
-      </div>
+      {products.map((product) => (
+        <ProductItem
+          key={product.id}
+          id={product.id}
+          name={product.name}
+          price={product.price}
+          image={product.photo}
+          addToCart={addToCart}
+        />
+      ))}
     </div>
   );
 };
