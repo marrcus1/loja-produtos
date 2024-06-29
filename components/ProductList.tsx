@@ -1,38 +1,51 @@
 // components/ProductList.tsx
 "use client"; 
-import React from 'react';
-import { useQuery } from 'react-query';
-import Product from './Product';
-import SkeletonLoader from './SkeletonLoader';
-import useCartStore from '../store/cartStore';
-
-const fetchProducts = async () => {
-  const res = await fetch('https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=4&rows=2&sortBy=price&orderBy=ASC');
-  if (!res.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return res.json();
-};
+// components/ProductList.tsx
+import React, { useEffect, useState } from 'react';
+import { fetchProducts } from '../services/api';
 
 const ProductList: React.FC = () => {
-  const { data, error, isLoading } = useQuery('products', fetchProducts);
-  const addToCart = useCartStore((state) => state.addToCart);
+  const [products, setProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (isLoading) return <SkeletonLoader />;
-  if (error) return <div>Failed to load products</div>;
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (error) {
+    return <div>Erro: {error}</div>;
+  }
 
   return (
     <div>
-      {data.map((product: any) => (
-        <Product
-          key={product.id}
-          id={product.id}
-          name={product.name}
-          price={product.price}
-          image={product.image}
-          addToCart={addToCart}
-        />
-      ))}
+      <h1>Produtos</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.photo} alt={product.name} />
+            <h2>{product.name}</h2>
+            <p>{product.brand}</p>
+            <p>{product.description}</p>
+            <p>R$ {product.price}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
