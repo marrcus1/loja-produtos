@@ -57,7 +57,7 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 10px;
 `;
 
 const Name = styled.h2`
@@ -72,7 +72,7 @@ const Price = styled.p`
 
 const Button = styled.button`
   padding: 8px 16px;
-  margin-top: 8px;
+  margin-top: 10px;
   background-color: #0070f3;
   color: #fff;
   border: none;
