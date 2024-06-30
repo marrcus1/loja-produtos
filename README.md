@@ -41,7 +41,7 @@ O site foi hospedado na Vercel.
 
 
 ## Contato
-Para mais informações ou suporte, entre em contato pelo email: vinnicius1394@gmail.com
+Para mais informações ou suporte, entre em contato pelo email: vinnicius1394@gmail.com e pelo tefefone (61) 98148-8930.
 
 
 
