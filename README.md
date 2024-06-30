@@ -36,6 +36,10 @@ Uma aplicação de loja de produtos construída com Next.js, TypeScript, Zustand
 ## Lincença
 Este projeto está licenciado sob a Licença MIT.
 
+## Hospedagem
+O site foi hospedado na Vercel.
+
+
 ## Contato
 Para mais informações ou suporte, entre em contato pelo email: vinnicius1394@gmail.com
 
