@@ -33,10 +33,10 @@ Uma aplicação de loja de produtos construída com Next.js, TypeScript, Zustand
    Teste
    -npm test
 
-   ## Lincença
+## Lincença
 Este projeto está licenciado sob a Licença MIT.
 
-Contato
+## Contato
 Para mais informações ou suporte, entre em contato pelo email: vinnicius1394@gmail.com
 
 
