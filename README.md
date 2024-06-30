@@ -25,12 +25,15 @@ Uma aplicação de loja de produtos construída com Next.js, TypeScript, Zustand
    ```sh
    git clone https://github.com/marrcus1/loja-produtos.git
    Navegue até o diretório do projeto:
-   cd:loja-produtos
-   npm install
-   - Uso
-   npm run dev
+   -cd:loja-produtos
+   -npm install
+   Uso
+   -npm run build
+   -npm run dev
+   Teste
+   -npm test
 
-   Licença
+   ## Lincença
 Este projeto está licenciado sob a Licença MIT.
 
 Contato
